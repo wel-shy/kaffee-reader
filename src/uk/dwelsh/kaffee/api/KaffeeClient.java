@@ -13,13 +13,18 @@ import uk.dwelsh.kaffee.models.User;
  */
 public class KaffeeClient {
     private HttpClient client;
-    private String baseUrl = "http://localhost:5000/api";
+    private String baseUrl;
 
     /**
      * Get an instance of the KaffeeClient.
      */
-    public KaffeeClient() {
+    public KaffeeClient() throws Exception {
         this.client = new HttpClient();
+        this.baseUrl = System.getenv("KAFFEE_URL");
+
+        if (this.baseUrl == null) {
+            throw new Exception("Could not get url");
+        }
     }
 
     /**
