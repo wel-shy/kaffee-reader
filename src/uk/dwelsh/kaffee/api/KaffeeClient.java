@@ -8,14 +8,26 @@ import uk.dwelsh.kaffee.models.Coffee;
 import uk.dwelsh.kaffee.models.Session;
 import uk.dwelsh.kaffee.models.User;
 
-public class KaffeeApi {
+/**
+ * Client for interfacing with the Kaffee API.
+ */
+public class KaffeeClient {
     private HttpClient client;
     private String baseUrl = "http://localhost:5000/api";
 
-    public KaffeeApi() {
+    /**
+     * Get an instance of the KaffeeClient.
+     */
+    public KaffeeClient() {
         this.client = new HttpClient();
     }
 
+    /**
+     * Authenticate with username and password.
+     * @param user - User to authenticate as.
+     * @return - Returns a session.
+     * @throws Exception - Throws on http exception.
+     */
     public Session login(User user) throws Exception {
         Gson gson = new Gson();
         String payload = gson.toJson(new LoginPayload(user.getEmail(), user.getPassword()));
@@ -23,6 +35,12 @@ public class KaffeeApi {
         return gson.fromJson(response, Session.class);
     }
 
+    /**
+     * Log a coffee with the api.
+     * @param token - Session token.
+     * @param coffee - Coffee type.
+     * @throws Exception - Throws on http exception.
+     */
     public void LogCoffee(String token, Coffee coffee) throws Exception {
         Gson gson = new Gson();
         String payload = gson.toJson(new CoffeePayload(coffee));

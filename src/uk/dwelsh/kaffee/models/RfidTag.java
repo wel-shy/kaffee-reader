@@ -19,6 +19,10 @@ public class RfidTag {
         return tag;
     }
 
+    public Coffee getCoffee() {
+        return coffee;
+    }
+
     @Override
     public String toString() {
         return "RfidTag{" +

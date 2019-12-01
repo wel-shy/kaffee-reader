@@ -13,7 +13,7 @@ class Logger {
 
     void log(String msg) {
         try(FileWriter fw = new FileWriter(new File(path).getAbsolutePath(), true)) {
-            fw.write(msg + "\n");
+            fw.write(Utils.getTimestamp() + " - " + msg + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

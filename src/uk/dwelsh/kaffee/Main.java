@@ -1,9 +1,7 @@
 package uk.dwelsh.kaffee;
 
-import uk.dwelsh.kaffee.api.KaffeeApi;
-import uk.dwelsh.kaffee.models.Coffee;
+import uk.dwelsh.kaffee.api.KaffeeClient;
 import uk.dwelsh.kaffee.models.RfidTag;
-import uk.dwelsh.kaffee.models.Session;
 import uk.dwelsh.kaffee.models.User;
 import uk.dwelsh.kaffee.store.RfidStore;
 import uk.dwelsh.kaffee.store.UserStore;
@@ -11,29 +9,28 @@ import uk.dwelsh.kaffee.store.UserStore;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        RfidStore store = new RfidStore(args[1] + "/rfid_store.json");
         Logger logger = new Logger("log.txt");
 
+        RfidStore store = new RfidStore(String.format("%s/rfid_store.json", args[1]));
         RfidTag rfid = store.get(t -> t.getTag().equals(args[0]));
-        String template = "%s - Scanned: %s - Status: %s";
-        logger.log(String.format(template, Utils.getTimestamp(), args[0], rfid == null ? "UNKNOWN" : "MATCH"));
+
+        logger.log(String.format("Scanned: %s - Status: %s", args[0], rfid == null ? "UNKNOWN" : "MATCH"));
 
         if (rfid == null) {
-            throw new Exception("RFID not recognised");
+            return;
         }
 
-        System.out.println(rfid);
-
-        UserStore userStore = new UserStore(args[1] + "/user_store.json");
+        UserStore userStore = new UserStore(String.format("%s/user_store.json", args[1]));
         User user = userStore.get(u -> u.getEmail().equals(rfid.getUserId()));
 
         System.out.println(user);
 
-        KaffeeApi api = new KaffeeApi();
-        Session session = api.login(user);
-        System.out.println(session);
+        KaffeeClient api = new KaffeeClient();
+        User oldUser = user;
+        user.setSession(api.login(user));
+        userStore.update(oldUser, user);
 
-        api.LogCoffee(session.getToken(), Coffee.Americano);
-        logger.log("Logged an Americano");
+        api.LogCoffee(user.getSession().getToken(), rfid.getCoffee());
+        logger.log(String.format("Logged an %s for %s", rfid.getCoffee(), rfid.getUserId()));
     }
 }
