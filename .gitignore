@@ -1,0 +1,7 @@
+/store/*
+/src/META-INF/
+/.idea/
+/lib/
+/log.txt
+/libs/
+/out/
