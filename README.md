@@ -16,8 +16,7 @@ touch ./rfid_store.json
 ## Run
 Run:
 ```shell script
-java -cp kaffee-reader.jar uk.dwelsh.kaffee.Main $1 $2
+java -cp kaffee-reader.jar uk.dwelsh.kaffee.Main $1
 ```
 Where:
-- `$1` is the rfid tag.
-- `$2` is the path to the store.
+- `$1` is the path to the store.

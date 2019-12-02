@@ -11,17 +11,18 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        // Initialise store.
         Logger logger = new Logger("log.txt");
-        RfidStore store = new RfidStore(String.format("%s/rfid_store.json", args[1]));
-        UserStore userStore = new UserStore(String.format("%s/user_store.json", args[1]));
+        RfidStore store = new RfidStore(String.format("%s/rfid_store.json", args[0]));
+        UserStore userStore = new UserStore(String.format("%s/user_store.json", args[0]));
 
+        // Listen for an input.
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine().trim();
-
             RfidTag rfid = store.get(t -> t.getTag().equals(input));
 
-            logger.log(String.format("Scanned: %s - Status: %s", args[0], rfid == null ? "UNKNOWN" : "MATCH"));
+            logger.log(String.format("Scanned: %s - Status: %s", input.trim(), rfid == null ? "UNKNOWN" : "MATCH"));
 
             if (rfid == null) {
                 return;
