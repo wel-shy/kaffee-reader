@@ -6,7 +6,7 @@ After=network.target
 WantedBy=multi-user.target
 
 [Service]
-ExecStart=/usr/bin/java -cp kaffee-reader.jar uk.dwelsh.kaffee.Main /home/pi/code/kaffee-reader/store
+ExecStart=/usr/bin/java -jar kaffee-reader.jar /home/pi/code/kaffee-reader/store < /dev/hidraw0
 WorkingDirectory=/home/pi/code/kaffee-reader/
 StandardOutput=inherit
 StandardError=inherit
