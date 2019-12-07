@@ -6,5 +6,5 @@ wget -P ./lib/ https://repo1.maven.org/maven2/com/squareup/okhttp3/okhttp/4.1.0/
 wget -P ./lib/ https://repo1.maven.org/maven2/com/squareup/okio/okio/2.4.1/okio-2.4.1.jar
 
 mkdir -p store
-touch rfid_store.json
-touch user_store.json
+touch ./store/rfid_store.json
+touch ./store/user_store.json

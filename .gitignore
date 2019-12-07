@@ -1,7 +1,11 @@
-/store/*
-/src/META-INF/
-/.idea/
-/lib/
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
 /log.txt
+/gradle/
 /lib/
 /out/
+/store/
+/.idea/

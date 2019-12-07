@@ -20,7 +20,7 @@
     <fileset dir="${basedir}/lib">
       <patternset refid="library.patterns"/>
     </fileset>
-    <fileset dir="${basedir}/lib">
+    <fileset dir="${basedir}/libs">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
@@ -30,7 +30,7 @@
     <fileset dir="${basedir}/lib">
       <patternset refid="library.patterns"/>
     </fileset>
-    <fileset dir="${basedir}/lib">
+    <fileset dir="${basedir}/libs">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
@@ -41,7 +41,7 @@
     <fileset dir="${basedir}/lib">
       <patternset refid="library.patterns"/>
     </fileset>
-    <fileset dir="${basedir}/lib">
+    <fileset dir="${basedir}/libs">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
@@ -52,7 +52,7 @@
     <fileset dir="${basedir}/lib">
       <patternset refid="library.patterns"/>
     </fileset>
-    <fileset dir="${basedir}/lib">
+    <fileset dir="${basedir}/libs">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
