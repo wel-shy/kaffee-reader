@@ -1,6 +1,7 @@
 package uk.dwelsh.kaffee.api
 
 import com.google.gson.Gson
+import io.github.cdimascio.dotenv.dotenv
 import uk.dwelsh.kaffee.HttpClient
 import uk.dwelsh.kaffee.api.payload.CoffeePayload
 import uk.dwelsh.kaffee.api.payload.LoginPayload
@@ -13,7 +14,7 @@ import uk.dwelsh.kaffee.models.User
  */
 class KaffeeClient {
     private val client: HttpClient = HttpClient()
-    private val baseUrl: String? = System.getenv("KAFFEE_URL")
+    private var baseUrl: String?
     /**
      * Authenticate with username and password.
      * @param user - User to authenticate as.
@@ -48,6 +49,9 @@ class KaffeeClient {
      * Get an instance of the KaffeeClient.
      */
     init {
+        val dotenv = dotenv()
+        baseUrl = dotenv["KAFFEE_URL"]
+
         if (baseUrl == null) {
             throw Exception("Could not get url")
         }
