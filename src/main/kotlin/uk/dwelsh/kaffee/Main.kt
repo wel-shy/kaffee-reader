@@ -88,12 +88,16 @@ fun main(args: Array<String>) {
             continue
         }
 
-        val api = KaffeeClient()
-        val oldUser = user
-        user.session = api.login(user)
-        userStore.update(oldUser, user)
+        try {
+            val api = KaffeeClient()
+            val oldUser = user
+            user.session = api.login(user)
+            userStore.update(oldUser, user)
 
-        api.logCoffee(user.session.token, rfid.coffee)
-        println(String.format("Logged an %s for %s", rfid.coffee, rfid.userId))
+            api.logCoffee(user.session.token, rfid.coffee)
+            println(String.format("Logged an %s for %s", rfid.coffee, rfid.userId))
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 }
